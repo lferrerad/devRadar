@@ -7,22 +7,22 @@ module.exports = {
 
     const techsArray = parseStringAsArray(techs); 
     
-    const devs = await Dev.findOne({
+    const devs = Dev.findOne({
       techs: {
-        $in: techsArray,  
-      },
-      location: {
-        $near: {
-          $geometry: {
-            type: 'Point',
-            coordinates: [longitude, latitude],
+        $in: techsArray, },
+        location: {
+          $near: {
+            $geometry: {
+              type: 'Point',
+              coordinates: [longitude, latitude],
+            },
+            $maxDistance: 10000,
           },
-          $maxDistance: 10000,
         },
-      },
-    });
+      });
 
     return response.json({ devs });  
 
+    
   }
 }
